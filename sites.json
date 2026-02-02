@@ -3,10 +3,10 @@
         "name": "SNRT News - All",
         "url": "https://snrtnews.com/all",
         "container": ".views-row",
-        "title_css": ".card-title a",
+        "title_css": "h2.card-title a",
         "desc_css": ".card-text",
         "img_css": "img",
-        "time_css": ".views-field-created, .card-date",
+        "time_css": ".views-field-created",
         "filename": "snrt_all.xml"
     }
 ]
