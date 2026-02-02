@@ -1,0 +1,33 @@
+name: Update RSS Feeds
+
+on:
+  schedule:
+    - cron: '0 */1 * * *' # This runs every hour. Change '1' to '2' for every 2 hours.
+  workflow_dispatch:      # Allows you to run it manually for testing
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run scraper
+        run: python main.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add *.xml
+          git commit -m "Update RSS feeds: $(date)" || exit 0
+          git push
